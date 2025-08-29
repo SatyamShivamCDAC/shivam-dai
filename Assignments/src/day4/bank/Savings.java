@@ -8,7 +8,7 @@ public class Savings extends Account {
     @Override
     public boolean deposit(int amount) throws InvalidAmountException {
         if (amount <= 0) {
-            throw new InvalidAmountException("Amount valid should be a positive integer.");
+            throw new InvalidAmountException("Amount value should be a positive integer.");
         }
         super.setBalance(super.getBalance() + amount);
         return true;
