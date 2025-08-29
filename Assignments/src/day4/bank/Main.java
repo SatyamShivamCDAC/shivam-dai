@@ -33,13 +33,22 @@ public class Main {
 //
 //        System.out.println(satyam);
 
+//        try {
+//            satyam.withdraw(75);
+//        }
+//        catch (InvalidAmountException |  InsufficientBalanceException | MaxWithdrawAmountException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        System.out.println(satyam);
+
+        Transaction transaction = new Transaction();
+
         try {
-            satyam.withdraw(75);
+            transaction.makeTransaction(shivam, satyam, -500);
         }
-        catch (InvalidAmountException |  InsufficientBalanceException | MaxWithdrawAmountException e) {
+        catch (InvalidAmountException | MinDenominationException | MinimumBalanceException | InsufficientBalanceException | MaxWithdrawAmountException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(satyam);
 
     }
 }
