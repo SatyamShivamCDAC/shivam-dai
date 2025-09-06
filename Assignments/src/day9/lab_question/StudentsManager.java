@@ -1,9 +1,6 @@
 package day9.lab_question;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,8 +25,11 @@ public class StudentsManager {
     public static List<Student> getTopNStudents(List<Student> students, int limit) {
         return students.stream().sorted(Comparator.comparing(Student::getCgpa).reversed()).limit(limit).collect(Collectors.toList());
     }
-//
-//    public static double averageCGPA(List<Student> students) {
-//        return students.stream().reduce((s1, s2) -> )
-//    }
+
+    public static double getAverageCGPA(List<Student> students) {
+        Optional<Float> marks = students.stream()
+                .map(s -> s.getCgpa())
+                .reduce((m1, m2) -> m1 + m2);
+        return marks.get() / students.size();
+    }
 }

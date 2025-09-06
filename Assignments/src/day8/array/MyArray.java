@@ -7,18 +7,16 @@ public class MyArray {
         this.array = array;
     }
 
-    public int[] getArray() {
-        return array;
-    }
-
-    public void setArray(int[] array) {
-        this.array = array;
-    }
-
     public synchronized void printArray() {
         System.out.print(Thread.currentThread().getName() + ": ");
-        for (int i : array)
+        for (int i : array) {
             System.out.print(i + " ");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         System.out.println();
     }
 }

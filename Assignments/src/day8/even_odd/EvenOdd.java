@@ -22,7 +22,7 @@ public class EvenOdd {
         numbers.add(value);
         notifyAll();
         hasValue = true;
-        System.out.println(Thread.currentThread().getName() + " Enqueued: " + value);
+        //System.out.println(Thread.currentThread().getName() + " Enqueued: " + value);
     }
 
     public synchronized void dequeue() {
@@ -33,7 +33,8 @@ public class EvenOdd {
                 throw new RuntimeException(e);
             }
         }
-        System.out.println(Thread.currentThread().getName() + " Dequeued: " + numbers.poll());
+        //System.out.println(Thread.currentThread().getName() + " Dequeued: " + numbers.poll());
+        System.out.println(numbers.poll());
         notifyAll();
         hasValue = false;
     }

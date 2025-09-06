@@ -20,26 +20,35 @@ public class Main {
         stock.add(doll);
         stock.add(cube);
 
+        System.out.println("List of Stock:");
+        stock.listStock();
+
+        System.out.println("\nFilter by Sports: " + stock.filterByCategory("Sports"));
 
 
-        //stock.listStock();
-
-        //stock.filterByCategory("Sports");
-
-        //Collections.sort(stock.getToys());
-//        int result = Collections.binarySearch(stock.getToys(), new Toy(102, null, 0, null, null, 0, 0));
-//        System.out.println(result);
+        Collections.sort(stock.getToys());
+        int result = Collections.binarySearch(stock.getToys(), new Toy(102, null, 0, null, null, 0, 0));
+        System.out.println("Search for toy with id 102: " + result + " index");
 
 
-        //stock.listToysByPrice(500, 1000);
-        //stock.toysForAge(6);
+        System.out.println("Toys by price between 500 & 1000:");
+        stock.listToysByPrice(500, 1000);
 
-        //Collections.sort(stock.getToys(), new PriceComparator());
-        //Collections.sort(stock.getToys(), new NameComparator());
-        //stock.listStock();
+        System.out.println("\nToys for age 6:");
+        stock.toysForAge(6);
 
-        //stock.listOneYearOlderToys();
+        System.out.println("\nSorted toys by price:");
+        Collections.sort(stock.getToys(), new PriceComparator());
+        stock.listStock();
 
+        System.out.println("\nSorted toys by name:");
+        Collections.sort(stock.getToys(), new NameComparator());
+        stock.listStock();
+
+        System.out.println("\nOne year old toys:");
+        stock.listOneYearOlderToys();
+
+        System.out.println("\nToys grouped by category:");
         stock.groupByCategory();
     }
 }

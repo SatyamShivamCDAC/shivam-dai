@@ -31,7 +31,7 @@ public class Toy implements Comparable<Toy> {
     public String toString() {
 //        return String.format("\nToy Details >\nID: %d\nName: %s\nPrice: %.2f\nCategory: %s\nAges: %s\nPurchase Month: %d\nPurchase Year: %d\n", productId, name, price, category, ages, purchaseMonth, purchaseYear);
 //        return String.format("\nToy Details >\nID: %d\nName: %s\nPrice: %.2f\nCategory: %s\n", productId, name, price, category);
-        return name;
+        return name + " " + price + " " + purchaseYear + "\n";
     }
 
     public int getProductId() {
