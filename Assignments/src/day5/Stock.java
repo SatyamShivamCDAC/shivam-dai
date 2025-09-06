@@ -44,7 +44,7 @@ public class Stock {
         for (Toy toy : toys) {
             if (toy.getPrice() >= min && toy.getPrice() <= max) {
                 toysByPrice.add(toy);
-                System.out.println(toy);
+                System.out.print(toy);
             }
         }
     }
@@ -54,7 +54,7 @@ public class Stock {
         for (Toy toy : toys) {
             if (age >= toy.getAges()[0] && age <= toy.getAges()[1]) {
                 toysAge.add(toy);
-                System.out.println(toy);
+                System.out.print(toy);
             }
         }
     }
@@ -64,7 +64,7 @@ public class Stock {
         for (Toy toy : toys) {
             if (toy.getPurchaseYear() <= 2024) {
                 toysOlder.add(toy);
-                System.out.println(toy);
+                System.out.print(toy);
             }
         }
     }
@@ -75,7 +75,7 @@ public class Stock {
         for (Toy toy : toys) {
             categoryToys.put(toy.getCategory(), this.filterByCategory(toy.getCategory()));
         }
-        System.out.println(categoryToys);
+        System.out.print(categoryToys);
     }
 
     public List<Toy> getToys() {

@@ -3,6 +3,7 @@ package day7.store;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,37 +20,41 @@ public class Stock {
 
         Stream<Toy> toyStream = toys.stream();
 
-        //toyStream.forEach(System.out::println);
-
-        Map<String, List<Toy>> toysByCategory = toyStream.collect(Collectors.groupingBy(Toy::getCategory));
-        //System.out.println(toysByCategory);
+        System.out.println("Toys:");
+        toyStream.forEach(System.out::println);
 
         toyStream = toys.stream();
-        //toyStream.filter(t -> t.getPrice() >= 500 && t.getPrice() <= 1000).forEach(System.out::println);
+        Map<String, List<Toy>> toysByCategory = toyStream.collect(Collectors.groupingBy(Toy::getCategory));
+        System.out.println("\nToys by Category: " + toysByCategory);
 
-        //Comparator<Toy> toyComparator = Comparator.comparing(Toy::getPrice).thenComparing(Toy::getCategory);
+        toyStream = toys.stream();
+        System.out.println("\nToys between 500 & 1000:");
+        toyStream.filter(t -> t.getPrice() >= 500 && t.getPrice() <= 1000).forEach(System.out::println);
+
+        Comparator<Toy> toyComparator = Comparator.comparing(Toy::getPrice).thenComparing(Toy::getCategory);
         toyStream = toys.stream();
         Map<String, List<Toy>> toysByPriceCategory = toyStream.sorted(Comparator.comparing(Toy::getPrice)).collect(Collectors.groupingBy(Toy::getCategory));
-        //System.out.println(toysByPriceCategory);
+        System.out.println("\n Sorted Toys by price category:");
+        System.out.println(toysByPriceCategory);
+
+        System.out.println("\nToys one year older:");
+        toyStream = toys.stream();
+        toyStream.filter(t -> t.getPurchaseYear() <= 2024).forEach(System.out::println);
+
 
         toyStream = toys.stream();
-        //toyStream.filter(t -> t.getPurchaseYear() <= 2024).forEach(System.out::println);
+        Map<String, Long> toysByCategoryCount = toyStream.collect(Collectors.groupingBy(Toy::getCategory, Collectors.counting()));
+        System.out.println("\nToys by Category and Count: " + toysByCategoryCount);
+
 
         toyStream = toys.stream();
-        for (String key : toysByCategory.keySet()) {
-            System.out.println(key + " " + toysByCategory.get(key).size());
-        }
+        System.out.println("Cheapest toy: " + toyStream.min(Comparator.comparing(Toy::getPrice)));
 
         toyStream = toys.stream();
-        System.out.println(toyStream.min(Comparator.comparing(Toy::getPrice)));
-        toyStream = toys.stream();
-
-        System.out.println(toyStream.max(Comparator.comparing(Toy::getPrice)));
+        System.out.println("Expensive toy: " + toyStream.max(Comparator.comparing(Toy::getPrice)));
 
         toyStream = toys.stream();
-        Map<String, List<Toy>> ageToys = toyStream.collect(Collectors.groupingBy(Toy::getAgeGroup));
-        for (String key : ageToys.keySet()) {
-            System.out.println(key + " " + ageToys.get(key).size());
-        }
+        Map<String, Long> ageToys = toyStream.collect(Collectors.groupingBy(Toy::getAgeGroup, Collectors.counting()));
+        System.out.println("\nToys by age and count: " + ageToys);
     }
 }

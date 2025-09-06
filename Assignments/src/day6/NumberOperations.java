@@ -27,8 +27,8 @@ public class NumberOperations {
     public static void main(String[] args) {
 
         Predicate<Integer> isPositive = (n) -> n > 0;
-        //System.out.println(isPositive.test(3));
-        //System.out.println(isPositive.test(-3));
+        System.out.println("Is 3 positive?: " + isPositive.test(3));
+        System.out.println("Is -3 positive?: " + isPositive.test(-3));
 
 //        Predicate<Integer> isPrime = (n) -> {
 //            if (n == 0 || n == 1)
@@ -42,14 +42,14 @@ public class NumberOperations {
 
         Predicate<Integer> isPrime = NumberOperations::isPrime;
 
-//        System.out.println(isPrime.test(8));
+        System.out.println("Is 8 prime?: " + isPrime.test(8));
 
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> evens = operateOnNumbers(n -> n % 2 == 0, numbers);
-        System.out.println(evens);
+        System.out.println("Evens: " + evens);
 
         List<Integer> divBys = operateOnNumbers((n) -> (n % 2 == 0 || n % 3 == 0 || n % 5 == 0), numbers);
-        System.out.println(divBys);
+        System.out.println("Numbers divisible by 2, 3, & 5: " + divBys);
 
     }
 }
