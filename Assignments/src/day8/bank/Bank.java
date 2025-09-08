@@ -5,39 +5,25 @@ public class Bank {
 
         Account account = new Account(0);
 
-        Thread withdraw = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 1; i <= 6; i++) {
-                    account.withdraw(1000);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-
         Thread deposit = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1; i <= 5; i++) {
-                    account.deposit(100);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                account.deposit(250);
+                account.deposit(250);
             }
         });
 
-        withdraw.setName("Withdraw");
-        withdraw.start();
+        Thread withdraw = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                account.withdraw(500);
+            }
+        });
 
-        deposit.setName("Deposit");
+        withdraw.setName("Deposit");
+        deposit.setName("Withdraw");
+
         deposit.start();
-
+        withdraw.start();
     }
 }

@@ -8,45 +8,20 @@ public class Account {
     }
 
     public synchronized void withdraw(int amount) {
-        if (amount <= 0) {
-            System.out.println("Enter valid withdrawal amount.");
-            return;
-        }
-
-        while (balance < amount) {
+        if (balance < amount) {
             try {
-                System.out.println(Thread.currentThread().getName() + " Waiting " + amount + " " + balance);
                 wait();
             } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
-
         balance -= amount;
+        System.out.println("Amount Withdrawn: " + amount);
     }
 
     public synchronized void deposit(int amount) {
-        if (amount <= 0) {
-            System.out.println("Enter valid deposit amount.");
-            return;
-        }
-
-        while (balance > amount) {
-            try {
-                System.out.println(Thread.currentThread().getName() + " Waiting " + amount + " " + balance);
-                wait();
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
+        balance += amount;
+        System.out.println("Amount Deposited: " + amount);
+        notifyAll();
     }
 }

@@ -19,17 +19,30 @@ public class TwitterStats {
 
         Stream<Tweet> tweetStream = tweets.stream();
 
-        //tweetStream.filter(o -> o.getMonth() == 9).forEach(System.out::println);
+        System.out.println("Current month tweets:");
+        tweetStream.filter(o -> o.getMonth() == 9).forEach(System.out::println);
 
-        //tweetStream.filter(t -> t.getHashtags().contains("India")).forEach(System.out::println);
-        //tweetStream.filter(t -> t.getHashtags().contains("Bihar")).forEach(System.out::println);
+        tweetStream = tweets.stream();
+        System.out.println("\nTweets for hashtag India:");
+        tweetStream.filter(t -> t.getHashtags().contains("India")).forEach(System.out::println);
 
-        //tweetStream.filter(t -> t.getNumberOfViews() >= 10000).forEach(System.out::println);
+        tweetStream = tweets.stream();
+        System.out.println("\nTweets for hashtag Bihar:");
+        tweetStream.filter(t -> t.getHashtags().contains("Bihar")).forEach(System.out::println);
 
-        //System.out.println(tweetStream.filter(t -> t.getSubject().contains("India")).count());
+        tweetStream = tweets.stream();
+        System.out.println("\nTweets having more than 10000 views:");
+        tweetStream.filter(t -> t.getNumberOfViews() >= 10000).forEach(System.out::println);
 
+        System.out.println("\nCount tweets of subject India:");
+        tweetStream = tweets.stream();
+        System.out.println(tweetStream.filter(t -> t.getSubject().contains("India")).count());
+
+
+        System.out.println("\nTop 5 trending tweets:");
+        tweetStream = tweets.stream();
+        Comparator<Tweet> recent = (t1, t2) -> t1.getDay();
         Comparator<Tweet> numberOfViews = (t1, t2) -> t2.getNumberOfViews() - t1.getNumberOfViews();
-
         tweetStream
                 .filter(t -> t.getDay() == 2 && t.getMonth() == 9 && t.getYear() == 2025)
                 .sorted(numberOfViews)
